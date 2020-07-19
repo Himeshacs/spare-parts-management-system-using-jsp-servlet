@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Querys>
+
+	<query id="insert_sales">
+        <![CDATA[
+          	INSERT into sales_tab values(?,?,?,?,?)
+        ]]>
+	</query>
+	
+	<query id="update_sales">
+        <![CDATA[
+		Update SALES_TAB Set CustomerId = ?,ProductId = ?,Quantity = ?,date = ?
+		WHERE salesId = ?       ]]>
+	</query>
+	
+	<query id="select_sales_record">
+        <![CDATA[
+			SELECT * FROM SALES_TAB 
+			WHERE SALESID = ?       ]]>
+	</query>
+
+	<query id="select_all_sales">
+        <![CDATA[	select * from sales_product_view  ]]>
+	</query>	
+	
+	
+		<query id="insert_product">
+        <![CDATA[		
+        INSERT INTO product_tab(product_id,product_name,grade,type,brand,modal,image_path,price) 
+        VALUES(?,?,?,?,?,?,?,?)
+ ]]>
+	</query>
+	
+	<query id="get_all_products">
+        <![CDATA[		SELECT * FROM product_tab ]]>
+	</query>
+	
+	
+	<query id="update_product">
+        <![CDATA[		
+		UPDATE product_tab 
+		SET product_name = ?,type = ?,grade = ?,modal = ?,brand = ?,image_path = ?,price = ? 
+		WHERE product_id = ?
+		 ]]>
+	</query>
+		
+	<query id="get_daily_sales">
+        <![CDATA[		
+		SELECT sum(total) FROM sales_product_view  WHERE DATE(`date`) = CURDATE()
+		 ]]>
+	</query>	
+	
+		
+	<query id="get_weekly_sales">
+        <![CDATA[		
+		SELECT sum(total) 
+		FROM sales_product_view  
+		where date between date_sub(now(),INTERVAL 1 WEEK) and now()		 ]]>
+	</query>	
+
+	
+			
+	<query id="get_monthly_sales">
+        <![CDATA[		
+		SELECT sum(total) 
+		FROM   sales_product_view 
+		WHERE  date > (NOW() - INTERVAL 1 MONTH)	 ]]>
+	</query>	
+
+	<query id="get_sales_per_day">
+        <![CDATA[		
+		select dayofweek(date) as 'day',sum(total) as 'total' 
+		from sales_product_view
+		group by dayofweek(date) ]]>
+	</query>	
+	<query id="get_product_grades">
+        <![CDATA[		
+		SELECT COUNT(*) as 'count' FROM product_tab GROUP BY grade ORDER BY grade
+		]]>
+	</query>	
+	
+	<query id="insert_Users">
+        <![CDATA[		
+			INSERT INTO USER_TAB VALUES(?,?,?,?,?)
+		]]>
+	</query>	
+			<query id="get_all_products">
+        <![CDATA[		
+Select * from USER_TAB		]]>
+	</query>	
+	
+	<query id="update_user">
+        <![CDATA[		
+		UPDATE USER_TAB SET NAME = ?,EMAIL = ?, PASSWORD = ?, USERROLE = ? WHERE USERNAME = ?	]]>
+	</query>	
+	
+		<query id="get_all_customers">
+        <![CDATA[		
+Select * from customer_tab		]]>
+	</query>	
+	
+		<query id="insert_customers">
+        <![CDATA[		
+INSERT INTO CUSTOMER_TAB VALUES(?,?,?,?,?)]]>
+	</query>	
+		
+				<query id="update_purchase">
+        <![CDATA[		
+Update purchase set supplierID = ? ,productID = ? ,unitPrice = ?,totalQuantity = ?,subTotal = ?,purchaseStatus = ?,purchaseDate = ?
+where purchaseID = ?	]]>
+	</query>	
+	
+					<query id="insert_purchase">
+        <![CDATA[		
+Insert into purchase(purchaseID,supplierID,productID,unitPrice,totalQuantity,subTotal,purchaseStatus,purchaseDate) values(?,?,?,?,?,?,?,?)	]]>
+	</query>	
+		<query id="select_all_purchases">
+        <![CDATA[		
+	Select * From Purchase	]]>
+	</query>	
+					<query id="sellect_all_suppliers">
+        <![CDATA[		
+Select * From Supplier	]]>
+	</query>	
+					<query id="insert_suppliers">
+        <![CDATA[		
+Insert into supplier(supplierID,companyName,contactPerson,email,contactNumber,companyAddress) values(?,?,?,?,?,?)	]]>
+	</query>	
+	
+						<query id="update_supplier">
+        <![CDATA[		
+Update Supplier set companyName = ?,contactPerson = ?,email = ?,contactNumber = ?,companyAddress = ?
+where supplierID = ?	]]>
+	</query>	
+						<query id="select_all_inventory">
+        <![CDATA[		
+Select * From Inventory	]]>
+	</query>	
+						<query id="insert_inventory">
+        <![CDATA[		
+Insert into inventory(inventoryID,productID,instoreInventory,unitsPurchased,unitsSold,closingInventory,updateDate,updateTime) values(?,?,?,?,?,?,?,?)]]>
+	</query>	
+						<query id="update_inventory">
+        <![CDATA[		
+Update Inventory set productID = ?,instoreInventory = ?,unitsPurchased = ?,unitsSold = ?,closingInventory = ?,updateDate = ?,updateTime = ?
+where inventoryID = ?]]>
+	</query>	
+	
+	<query id="reduce_from_inventory">
+        <![CDATA[
+        		
+Update Inventory set instoreInventory = ? 
+where productID = ?
+
+		]]>
+	</query>
+	
+</Querys>
+	
